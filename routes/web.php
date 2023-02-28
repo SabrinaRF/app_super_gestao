@@ -36,14 +36,7 @@ options
 
 principais verbios, para controlar o servidar da aplicação
 */
-
-
-Route::get('/', 'PrincipalController@principal');
-
-Route::get('/sobre-nos', 'SobreNosController@sobreNos');
-
-Route::get('/contato', 'ContatoController@contato');
-//nome,categoria, assunto, mensagem
+/*
 
 Route::get(
     '/contato/{nome}/{categoria_id}', 
@@ -53,5 +46,30 @@ Route::get(
     ){
         echo'Estamos aqui: '.$nome.' - '.$categoria_id;   
     }
-)->where('categoria_id','[0-9]+')->where('nome', '[A-Za-z]+');
+)->where('categoria_id','[0-9]+')->where('nome', '[A-Za-z]+');*/
 // trabalhando com envio de parametros - ? o laravel identifica que não é obrigatório
+
+
+Route::get('/', 'PrincipalController@principal')->name('site.index');
+Route::get('/sobre-nos', 'SobreNosController@sobreNos')->name('site.sobrenos');
+Route::get('/contato', 'ContatoController@contato')->name('site.contato');
+Route::get('/login', 'PrincipalController@principal')->name('site.login');
+
+Route::prefix('/app')->group(function(){
+    Route::get('/clientes', 'SobreNosController@sobreNos')->name('app.clientes');
+    Route::get('/fornecedores', 'ContatoController@contato')->name('app.fornecedores');
+    Route::get('/produtos', 'ContatoController@contato')->name('app.produtos');
+});
+
+Route::get('/rota1',function(){
+    echo 'rata 1';
+})->name('site.rota1');
+
+Route::get('/rota2',function(){
+    return redirect()->route('site.rota1');
+})->name('site.rota2');
+
+//Route::redirect('/rota1','/rota2');
+
+
+
