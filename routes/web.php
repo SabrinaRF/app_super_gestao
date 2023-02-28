@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return "Olá seja bem vindo ao curso";
 });
 Route::get('/sobre-nos', function () {
@@ -23,6 +23,11 @@ Route::get('/contato', function () {
     return "contato
     ";
 });
+*/
+
+Route::get('/', 'PrincipalController@principal');
+Route::get('/sobre-nos', 'SobreNosController@sobreNos');
+Route::get('/contato', 'ContatoController@contato');
 
 //Route::get($uri,$callback);// rota, ação que deve ser tomada.
 /*Verbos http
