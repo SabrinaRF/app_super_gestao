@@ -24,7 +24,7 @@ Route::get('/contato', function () {
     ";
 });
 
-Route::get($uri,$callback);// rota, acção que deve ser tomada.
+//Route::get($uri,$callback);// rota, ação que deve ser tomada.
 /*Verbos http
 get
 post
