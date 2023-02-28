@@ -46,8 +46,12 @@ Route::get('/contato', 'ContatoController@contato');
 //nome,categoria, assunto, mensagem
 
 Route::get(
-    '/contato/{nome}/{categoria}/{assunto}/{mensagem}', 
-    function(string $nome, string $categoria, string $assunto, string $mensagem){
-        echo'Estamos aqui: '.$nome.' - '.$categoria.' - '.$assunto.' - '.$mensagem;   
+    '/contato/{nome}/{categoria_id}', 
+    function(
+        string $nome= 'Desconhecido', 
+        int $categoria_id= 1 //1- Informação
+    ){
+        echo'Estamos aqui: '.$nome.' - '.$categoria_id;   
     }
-);// trabalhando com envio de parametros
+)->where('categoria_id','[0-9]+')->where('nome', '[A-Za-z]+');
+// trabalhando com envio de parametros - ? o laravel identifica que não é obrigatório
