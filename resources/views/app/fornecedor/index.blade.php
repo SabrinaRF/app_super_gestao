@@ -42,6 +42,7 @@
     Status:{{ $fornecedores[1]['status'] }}<br>
     @isset($fornecedores[1]['cnpj'])
         CNPJ:{{ $fornecedores[1]['cnpj'] }}<br>
+        
     @endisset
 @endisset
 
