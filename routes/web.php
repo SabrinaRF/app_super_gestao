@@ -57,22 +57,18 @@ Route::get('/login', 'PrincipalController@principal')->name('site.login');
 
 Route::prefix('/app')->group(function(){
     Route::get('/clientes', 'SobreNosController@sobreNos')->name('app.clientes');
-    Route::get('/fornecedores', 'ContatoController@contato')->name('app.fornecedores');
+    Route::get('/fornecedor', 'FornecedorController@index')->name('app.fornecedor');
     Route::get('/produtos', 'ContatoController@contato')->name('app.produtos');
 });
-
-Route::get('/rota1',function(){
-    echo 'rata 1';
-})->name('site.rota1');
-
-Route::get('/rota2',function(){
-    return redirect()->route('site.rota1');
-})->name('site.rota2');
 
 //Route::redirect('/rota1','/rota2');
 Route::fallback(function(){
     echo 'A rota acessada não existe. <a href="'.route('site.index').'" >Clique aqui</a> para ir para a página principal';
 });
+Route::get('/teste/{p1}/{p2}','TesteController@teste')->name('site.teste');
+
+
+
 
 
 
