@@ -44,7 +44,7 @@ class CreateUnidadesTable extends Migration
         });
 
         Schema::table('produtos', function (Blueprint $table){
-            $table->dropForeign('produtos_unidades_id_foreing');
+            $table->dropForeign('produtos_unidades_id_foreing');//[table]_[colunn]_foreign
             $table->dropColumn('unidades_id');
 
         });
