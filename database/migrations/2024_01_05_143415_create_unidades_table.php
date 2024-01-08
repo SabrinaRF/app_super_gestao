@@ -38,14 +38,14 @@ class CreateUnidadesTable extends Migration
      */
     public function down()
     {
-        Schema::table('produto_detalhes', function (Blueprint $table){
-            $table->dropForeign('produto_detalhes_unidades_id_foreign');//[table]_[colunn]_foreign
-            $table->dropColumn('unidades_id');
+        Schema::table('produtos_detalhes', function (Blueprint $table){
+            $table->dropForeign('produtos_detalhes_unidade_id_foreign');//[table]_[colunn]_foreign
+            $table->dropColumn('unidade_id');
         });
 
         Schema::table('produtos', function (Blueprint $table){
-            $table->dropForeign('produtos_unidades_id_foreing');
-            $table->dropColumn('unidades_id');
+            $table->dropForeign('produtos_unidade_id_foreign');
+            $table->dropColumn('unidade_id');
 
         });
 
