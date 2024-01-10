@@ -1,6 +1,7 @@
 <?php
 
 use App\Fornecedor;
+use App\MotivoContato;
 use App\SiteContato;
 use Illuminate\Database\Seeder;
 
@@ -16,6 +17,8 @@ class DatabaseSeeder extends Seeder
         // $this->call(UsersTableSeeder::class);
         $this->call(FornecedorSeeder::class);
         $this->call(SiteContatoSeeder::class);
+        $this->call(MotivoContatoSeeder::class);
+
 
     }
 }
