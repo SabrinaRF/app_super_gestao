@@ -19,6 +19,8 @@ class ContatoController extends Controller
     public function salvar(Request $request){
         
         //validação dos dados
+
+
         $request->validate([
             'nome'=>'required|min:3|max:40',
             'telefone'=> 'required',
@@ -26,7 +28,7 @@ class ContatoController extends Controller
             'motivo_contatos_id'=> 'required',
             'mensagem'=> 'required|max:2000'
         ]);
-
+        //SiteContato::create($request->all());
         $contato = new SiteContato();
         $contato->name = $request->input('nome');
         $contato->telefone = $request->input('telefone');
