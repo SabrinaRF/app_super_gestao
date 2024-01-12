@@ -50,17 +50,15 @@ Route::get(
 // trabalhando com envio de parametros - ? o laravel identifica que não é obrigatório
 
 
-Route::middleware(LogAcessoMiddleware::class)
-    ->get('/', 'PrincipalController@principal')
-    ->name('site.index');
+Route::get('/', 'PrincipalController@principal')->name('site.index')->middleware('log.acesso');
 
 Route::get('/sobre-nos', 'SobreNosController@sobreNos')->name('site.sobrenos');
 Route::get('/contato', 'ContatoController@contato')->name('site.contato');
 Route::post('/contato', 'ContatoController@salvar')->name('site.contato');
 Route::get('/login', 'PrincipalController@principal')->name('site.login');
 
-Route::prefix('/app')->group(function(){
-    Route::get('/clientes', 'SobreNosController@sobreNos')->name('app.clientes');
+Route::middleware('autenticacao')->prefix('/app')->group(function(){
+    Route::get('/clientes', 'SobreNosController@sobreNos')->name('app.clientes');   
     Route::get('/fornecedor', 'FornecedorController@index')->name('app.fornecedor');
     Route::get('/produtos', 'ContatoController@contato')->name('app.produtos');
 });
