@@ -13,8 +13,14 @@ class AutenticacaoMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $metodo_autenticacao,$perfil)
     {
+        echo $metodo_autenticacao;
+
+        if ($metodo_autenticacao == 'padrao') {
+            // Verificar se o usuário está autenticado (logado)
+        }
+        
         if(true){
             return $next($request); 
         }else{

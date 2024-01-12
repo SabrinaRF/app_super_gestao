@@ -55,9 +55,9 @@ Route::get('/', 'PrincipalController@principal')->name('site.index')->middleware
 Route::get('/sobre-nos', 'SobreNosController@sobreNos')->name('site.sobrenos');
 Route::get('/contato', 'ContatoController@contato')->name('site.contato');
 Route::post('/contato', 'ContatoController@salvar')->name('site.contato');
-Route::get('/login', 'PrincipalController@principal')->name('site.login');
+Route::get('/login', 'LoginController@index')->name('site.login');
 
-Route::middleware('autenticacao')->prefix('/app')->group(function(){
+Route::middleware('autenticacao:padrao,visitante')->prefix('/app')->group(function(){
     Route::get('/clientes', 'SobreNosController@sobreNos')->name('app.clientes');   
     Route::get('/fornecedor', 'FornecedorController@index')->name('app.fornecedor');
     Route::get('/produtos', 'ContatoController@contato')->name('app.produtos');
