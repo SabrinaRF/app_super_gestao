@@ -20,15 +20,31 @@ class ContatoController extends Controller
         
         //validação dos dados
 
-
-        $request->validate([
+        $regras = [
             'nome'=>'required|min:3|max:40',
             'telefone'=> 'required',
             'email'=> 'email',
             'motivo_contatos_id'=> 'required',
             'mensagem'=> 'required|max:2000'
-        ]);
+        ];
+
+        $feedback =[
+            'nome.required'=> 'O campo nome é obrigatório!',
+            'nome.min'=> 'O campo nome deve ter no mínimo 3 caracteres!',
+            'nome.max'=> 'O campo nome deve ter no máximo 40 caracteres',
+            'email.email'=> 'O email informado não é válido!',
+            'motivo_contatos_id.required'=> 'O campo motivo é obrigatório!',
+            'mensagem.required'=> 'A mensagem é um campo obrigatório!',
+            'mensagem.max'=> 'A mensagem deve conter no máximo 2000 caracteres!',
+
+            //generico
+            'required'=> 'O campo :attribute nome é obrigatório!'
+        ];
+
+        $request->validate($regras,$feedback);
+
         //SiteContato::create($request->all());
+        
         $contato = new SiteContato();
         $contato->name = $request->input('nome');
         $contato->telefone = $request->input('telefone');
