@@ -15,16 +15,12 @@ class AutenticacaoMiddleware
      */
     public function handle($request, Closure $next, $metodo_autenticacao,$perfil)
     {
-        echo $metodo_autenticacao;
+        session_start();
 
-        if ($metodo_autenticacao == 'padrao') {
-            // Verificar se o usuário está autenticado (logado)
-        }
-        
-        if(true){
-            return $next($request); 
+        if (isset($_SESSION['email']) && $_SESSION['email'] != '') {
+            return $next($request);
         }else{
-            return Response('Acesso NEGADO');
+            return redirect()->route('site.login', ['erro'=> 2]);
         }
     }
 }
