@@ -1,5 +1,5 @@
 
-@extends('site.layouts.basico')<!--vai direto pro diretorio view-->
+@extends('app.layouts.basico')<!--vai direto pro diretorio view-->
 
 @section('titulo', $titulo)
 
