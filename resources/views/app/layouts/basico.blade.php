@@ -8,6 +8,6 @@
 
     <body>
         @include('app.layouts._partials.nav')
-        @yield('conteudo')<!-- local onde o conteudo vai ficar alocado -->
+        @yield('conteudo')
     </body>
 </html>
