@@ -50,10 +50,8 @@ Route::get(
 // trabalhando com envio de parametros - ? o laravel identifica que não é obrigatório
 
 
-Route::get('/', 'PrincipalController@principal')->name('site.index')->middleware('log.acesso');
-
+Route::get('/', 'PrincipalController@principal')->name('site.index');
 Route::get('/sobre-nos', 'SobreNosController@sobreNos')->name('site.sobrenos');
-
 Route::get('/contato', 'ContatoController@contato')->name('site.contato');
 Route::post('/contato', 'ContatoController@salvar')->name('site.contato');
 
