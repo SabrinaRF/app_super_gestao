@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterFornecedoresNovaColunaSiteComAfter extends Migration
+class CreateLogAcessosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class AlterFornecedoresNovaColunaSiteComAfter extends Migration
      */
     public function up()
     {
-        Schema::table('fornecedores', function(Blueprint $table){
-            $table->string('site',150)->after('nome')->nullable()->default('');
+        Schema::create('log_acessos', function (Blueprint $table) {
+            $table->id();
+            $table->string('log', 200);
+            $table->timestamps();
         });
     }
 
@@ -25,9 +27,6 @@ class AlterFornecedoresNovaColunaSiteComAfter extends Migration
      */
     public function down()
     {
-       
-        Schema::table('fornecedores', function(Blueprint $table){
-            $table->dropColumn('site');
-        });
+        Schema::dropIfExists('log_acessos');
     }
 }
