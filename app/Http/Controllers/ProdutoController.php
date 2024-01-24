@@ -2,11 +2,116 @@
 
 namespace App\Http\Controllers;
 
+use App\Produto;
+use App\Unidade;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 class ProdutoController extends Controller
 {
-    public function index(){
-        return view('app.produto');
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
+    {
+        $produtos= Produto::paginate(5);
+
+        return view('app.produto.index', ['produtos'=>$produtos, 'request'=>$request->all() ]);///aqui
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $unidades = Unidade::all();
+        return view('app.produto.create', ['unidades'=>$unidades]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //$msg = '';
+
+        //validação dos dados
+        //if($request->input('_token') != '' && $request->input('id') != '' ){
+
+            $regras = [
+                'nome'=>'required|min:3|max:40',
+                'descricao'=> 'required|max:2000',
+                'peso'=> 'required|integer',
+                'unidade_id'=> 'exists:unidades,id'
+            ];
+
+            $feedback =[
+                //generico
+                'required'=> 'O campo :attribute é obrigatório!',
+                //especifico
+                'nome.min'=> 'O campo nome deve ter no mínimo 3 caracteres!',
+                'nome.max'=> 'O campo nome deve ter no máximo 40 caracteres',
+                'descicao.max'=> 'O campo descrição deve ter no máximo 2000 caracteres!',
+                'peso.integer'=> 'O campo peso deve ser um número inteiro',
+                'unidade_id.exists'=> 'A unidade de medida informada não existe',
+            ];
+
+            $request->validate($regras,$feedback);
+        //}
+
+        Produto::create($request->all());
+        return redirect()->route('produto.index');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Produto  $produto
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Produto $produto)
+    {
+        return view('app.produto.show', ['produto' => $produto]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Produto  $produto
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Produto $produto)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Produto  $produto
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Produto $produto)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Produto  $produto
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Produto $produto)
+    {
+        //
     }
 }

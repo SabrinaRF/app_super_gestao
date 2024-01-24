@@ -71,8 +71,9 @@ Route::middleware('autenticacao:padrao,visitante')->prefix('/app')->group(functi
     Route::get('/fornecedor/excluir{id}', 'FornecedorController@excluir')->name('app.fornecedor.excluir');
 
 
-    Route::get('/produto', 'ProdutoController@index')->name('app.produto');
-    Route::get('/produto/adicionar', 'ProdutoController@adicionar')->name('app.produto.adicionar');
+    //produtos
+    Route::resource('produto','ProdutoController');
+
 });
 
 //Route::redirect('/rota1','/rota2');
