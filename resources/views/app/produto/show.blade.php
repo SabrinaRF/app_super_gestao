@@ -37,6 +37,9 @@
                         <td>{{ $produto->unidade_id}}</td>
                     </tr>
                 </table>
+                <ul>
+                    <li><a href="{{ route('produto_detalhe.create')}}"> Adicionar Detalhes do Produto</a></li>
+                <ul>
             </div>
        </div>
 
