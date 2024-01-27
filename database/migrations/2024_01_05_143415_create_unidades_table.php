@@ -25,7 +25,7 @@ class CreateUnidadesTable extends Migration
             $table->foreign('unidade_id')->references('id')->on('unidades');
         });
 
-        Schema::table('produtos_detalhes', function(Blueprint $table){
+        Schema::table('produto_detalhes', function(Blueprint $table){
             $table->unsignedBigInteger('unidade_id');
             $table->foreign('unidade_id')->references('id')->on('unidades');
         });
@@ -38,8 +38,8 @@ class CreateUnidadesTable extends Migration
      */
     public function down()
     {
-        Schema::table('produtos_detalhes', function (Blueprint $table){
-            $table->dropForeign('produtos_detalhes_unidade_id_foreign');//[table]_[colunn]_foreign
+        Schema::table('produto_detalhes', function (Blueprint $table){
+            $table->dropForeign('produto_detalhes_unidade_id_foreign');//[table]_[colunn]_foreign
             $table->dropColumn('unidade_id');
         });
 

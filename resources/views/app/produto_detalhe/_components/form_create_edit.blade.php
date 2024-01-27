@@ -1,10 +1,14 @@
-{{ $slot}}
-{{ $classe}}
-
- <form method="post" action="{{ route('produto_detalhe_detalhe.update',['produto_detalhe' => $produto_detalhe])}}">
-                    
+ @if (isset($produto_detalhe->id))
+    <form method="post" action="{{ route('produto_detalhe.update',['produto_detalhe' => $produto_detalhe->id])}}">
     @csrf
     @method('PUT')
+@else
+    <form method="post" action="{{ route('produto_detalhe.store')}}">
+    @csrf
+@endif  
+    <input name="produto_id" value="{{ $produto_detalhe->produto_id ?? old('produto_id')}}" type="text" placeholder="ID do Produto" class="borda-preta">
+    {{ $errors->has('produto_id') ? $errors->first('produto_id') : ''}}
+
     <input name="comprimento" value="{{ $produto_detalhe->comprimento ?? old('comprimento')}}" type="text" placeholder="Comprimento" class="borda-preta">
     {{ $errors->has('comprimento') ? $errors->first('comprimento') : ''}}
 
@@ -14,14 +18,14 @@
     <input name="altura" value="{{ $produto_detalhe->altura ?? old('altura')}}" type="number" placeholder="Altura" class="borda-preta">         
     {{ $errors->has('altura') ? $errors->first('altura') : ''}}
 
-    <!--<select name="unidade_id">
+    <select name="unidade_id">
             
         @foreach ($unidades as $unidade )
             <option value="{{ $unidade->id }}"{{ ($produto_detalhe->unidade_id ?? old('unidade_id'))  == $unidade->id ? 'selected' : ' '  }}>{{ $unidade->descricao }}</option>
         @endforeach
         
     </select>
-    {{ $errors->has('unidade_id') ? $errors->first('unidade_id') : ''}}-->
+    {{ $errors->has('unidade_id') ? $errors->first('unidade_id') : ''}}
 
     <button type="submit" class="borda-preta">Adicionar</button>
 </form>
@@ -32,4 +36,4 @@
             <br>
         @endforeach
     </div>
-    endif
+    @endif

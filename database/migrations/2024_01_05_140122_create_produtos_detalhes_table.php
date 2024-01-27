@@ -13,7 +13,7 @@ class CreateProdutosDetalhesTable extends Migration
      */
     public function up()
     {
-        Schema::create('produtos_detalhes', function (Blueprint $table) {
+        Schema::create('produto_detalhes', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('produto_id');
             $table->float('comprimento',8,2);
@@ -21,7 +21,7 @@ class CreateProdutosDetalhesTable extends Migration
             $table->float('altura',8,2);
             $table->timestamps();
 
-            $table->foreign('produto_id')->references('id')->on('produtos');
+            $table->foreign('produto_id')->references('id')->on('produto');
             $table->unique('produto_id');
         });
     }
@@ -33,6 +33,6 @@ class CreateProdutosDetalhesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('produtos_detalhes');
+        Schema::dropIfExists('produto_detalhes');
     }
 }
