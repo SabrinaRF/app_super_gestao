@@ -1,7 +1,7 @@
-@extends('app.layouts.basico');
-@section('titulo', 'Produto');
+@extends('app.layouts.basico')
+@section('titulo', 'Produto')
 
-@section('conteudo');
+@section('conteudo')
 
 <br>
 <br>

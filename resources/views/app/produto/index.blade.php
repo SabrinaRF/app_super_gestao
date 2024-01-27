@@ -1,7 +1,7 @@
-@extends('app.layouts.basico');
-@section('titulo', 'Produtos');
+@extends('app.layouts.basico')
+@section('titulo', 'Produtos')
 
-@section('conteudo');
+@section('conteudo')
 
     <div class="conteudo-pagina">
          <div class="titulo-pagina">
@@ -10,7 +10,7 @@
         <div class="menu">
             <ul>
                 <li><a href="{{ route('produto.create') }}"> Novo Produto</a></li>
-                <li><a href="" >Listagem de Produtos</a></li>
+                <li><a href="{{ route('produto.index') }}" >Listagem de Produtos</a></li>
             <ul>
        </div>
        <div class="informacao-pagina">

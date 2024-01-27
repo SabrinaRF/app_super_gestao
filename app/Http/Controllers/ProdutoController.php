@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Fornecedor;
 use App\Produto;
 use App\ProdutoDetalhe;
 use App\Unidade;
@@ -43,7 +44,8 @@ class ProdutoController extends Controller
     public function create()
     {
         $unidades = Unidade::all();
-        return view('app.produto.create', ['unidades'=>$unidades]);
+        $fornecedores = Fornecedor::all();
+        return view('app.produto.create', ['fornecedores'=>$fornecedores,'unidades'=>$unidades]);
     }
 
     /**
@@ -63,7 +65,8 @@ class ProdutoController extends Controller
                 'nome'=>'required|min:3|max:40',
                 'descricao'=> 'required|max:2000',
                 'peso'=> 'required|integer',
-                'unidade_id'=> 'exists:unidades,id'
+                'unidade_id'=> 'exists:unidades,id',
+                'fornecedor_id'=> 'exists:fornecedores,id'
             ];
 
             $feedback =[
@@ -75,6 +78,7 @@ class ProdutoController extends Controller
                 'descicao.max'=> 'O campo descrição deve ter no máximo 2000 caracteres!',
                 'peso.integer'=> 'O campo peso deve ser um número inteiro',
                 'unidade_id.exists'=> 'A unidade de medida informada não existe',
+                'fornecedor_id.exists'=> 'A fornecedor informado não existe'
             ];
 
             $request->validate($regras,$feedback);
@@ -104,8 +108,10 @@ class ProdutoController extends Controller
     public function edit(Produto $produto)
     {
         $unidades = Unidade::all();
+        $fornecedores = Fornecedor::all();
         //return view('app.produto.edit', ['produto' => $produto,'unidades'=>$unidades]);
-        return view('app.produto.create', ['produto' => $produto,'unidades'=>$unidades]);
+        
+        return view('app.produto.edit', ['fornecedores'=>$fornecedores,'produto' => $produto,'unidades'=>$unidades]);
 
     }
 
@@ -118,6 +124,28 @@ class ProdutoController extends Controller
      */
     public function update(Request $request, Produto $produto)
     {
+        $regras = [
+            'nome'=>'required|min:3|max:40',
+            'descricao'=> 'required|max:2000',
+            'peso'=> 'required|integer',
+            'unidade_id'=> 'exists:unidades,id',
+            'fornecedor_id'=> 'exists:fornecedores,id'
+        ];
+
+        $feedback =[
+            //generico
+            'required'=> 'O campo :attribute é obrigatório!',
+            //especifico
+            'nome.min'=> 'O campo nome deve ter no mínimo 3 caracteres!',
+            'nome.max'=> 'O campo nome deve ter no máximo 40 caracteres',
+            'descicao.max'=> 'O campo descrição deve ter no máximo 2000 caracteres!',
+            'peso.integer'=> 'O campo peso deve ser um número inteiro',
+            'unidade_id.exists'=> 'A unidade de medida informada não existe',
+            'fornecedor_id.exists'=> 'A fornecedor informado não existe'
+        ];
+
+        $request->validate($regras,$feedback);
+    
         $request->all(); //payload
         $produto; //estado do objeto antes do upload
 
