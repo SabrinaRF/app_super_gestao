@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Produto;
+use App\ProdutoDetalhe;
 use App\Unidade;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
@@ -18,7 +19,20 @@ class ProdutoController extends Controller
     {
         $produtos= Produto::paginate(5);
 
-        return view('app.produto.index', ['produtos'=>$produtos, 'request'=>$request->all() ]);///aqui
+        /* Opção 1: não muito recomendada
+        foreach($produtos as $key => $produto){
+         
+            $produto_detalhes = ProdutoDetalhe::where('produto_id', $produto->id)->first();
+
+            if (isset($produto_detalhes)) {
+
+                $produtos[$key]['comprimento'] = $produto_detalhes->comprimento;
+                $produtos[$key]['largura'] = $produto_detalhes->largura;
+                $produtos[$key]['altura'] = $produto_detalhes->altura;
+            }
+        }*/
+        
+        return view('app.produto.index', ['produtos'=>$produtos, 'request'=>$request->all() ]);
     }
 
     /**
