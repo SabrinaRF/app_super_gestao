@@ -17,7 +17,7 @@ class ProdutoController extends Controller
      */
     public function index(Request $request)
     {
-        $produtos= Produto::paginate(5);
+        $produtos= Produto::with(['produtoDetalhe','fornecedor'])->paginate(5);//with(['produtoDetalhe']) Eager Loading | Lazy Loading (padrão)
 
         /* Opção 1: não muito recomendada
         foreach($produtos as $key => $produto){
@@ -31,7 +31,7 @@ class ProdutoController extends Controller
                 $produtos[$key]['altura'] = $produto_detalhes->altura;
             }
         }*/
-        
+
         return view('app.produto.index', ['produtos'=>$produtos, 'request'=>$request->all() ]);
     }
 
