@@ -1,21 +1,21 @@
 @extends('app.layouts.basico')
-@section('titulo', 'Produto')
+@section('titulo', 'Cliente')
 
 @section('conteudo')
 
     <div class="conteudo-pagina">
          <div class="titulo-pagina">
-            <p>Adicionar Produto</p>
+            <p>Adicionar Cliente</p>
         </div>
         <div class="menu">
             <ul>
-                <li><a href="{{ route('produto.index')}}"> Voltar</a></li>
+                <li><a href="{{ route('cliente.index')}}"> Voltar</a></li>
             <ul>
        </div>
       <div class="informacao-pagina">
             <div style="width:50%;margin-left: auto; margin-right:auto;">
-            @component('app.produto._components.form_create_edit', ['fornecedores'=>$fornecedores,'unidades'=>$unidades])
-                <p> Cadastrar do Produto</p>
+            @component('app.cliente._components.form_create_edit')
+                <p> Cadastrar do Cliente</p>
             @endcomponent
             </div>
         </div>

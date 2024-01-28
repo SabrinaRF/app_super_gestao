@@ -15,7 +15,7 @@
        </div>
        <div class="informacao-pagina">
             <div style="width:90%;margin-left: auto; margin-right:auto;">
-                <table border="1" width=100%>
+                <table border="1" width=90%>
                     <thered>
                     <tr>
                         <th>Nome</th>
@@ -51,8 +51,19 @@
                                     <a href="#" onclick="document.getElementById('form_{{$produto->id}}').submit()">Excluir</a></td>
                                 </form>
                         </tr>
+                        <tr>
+                            <td coldspan="12">
+                                <p>Pedidos</p>
+                                @foreach ($produto->pedidos as $pedido)
+                                    <a href="{{ route('pedido-produto.create',['pedido'=>$pedido->id])}}">
+                                        Pedido: {{ $pedido->id}},
+                                    </a>
+                                @endforeach
+                            </td>
+                        </tr>
                         @endforeach
                     </tbody>
+                    
                 </table>
 
                 {{ $produtos->appends($request)->links()}}
