@@ -25,17 +25,6 @@ Route::get('/contato', function () {
 });
 */
 
-//Route::get($uri,$callback);// rota, ação que deve ser tomada.
-/*Verbos http
-get
-post
-put
-patch
-deelete
-options
-
-principais verbios, para controlar o servidar da aplicação
-*/
 /*
 
 Route::get(
